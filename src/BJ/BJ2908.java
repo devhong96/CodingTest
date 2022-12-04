@@ -1,6 +1,8 @@
+package BJ;
+
 import java.util.*;
 
-class backJoon4344{
+class BJ2908 {
     public static void main(String[] args){
 
         Scanner scan = new Scanner(System.in);
