@@ -9,7 +9,6 @@ class Main {
 
         int count = Integer.parseInt(br.readLine());
         int[] arr = new int[count];
-        int[] index = new int[count];
 
         int sum=0;
         int freq = 0;
@@ -38,11 +37,11 @@ class Main {
             freq = al.get(1);
         } else freq = al.get(0);
 
-        long avg = Math.round((double) sum / (int) arr.length);
+        long avg = Math.round((double) sum / arr.length);
 
         System.out.println(avg); //산술평균
         System.out.println(arr[arr.length/2]); // 중앙값
-        System.out.println(freq);
+        System.out.println(freq); //최빈값 중 
         System.out.println(arr[count-1]-arr[0]); //범위
 
     }
