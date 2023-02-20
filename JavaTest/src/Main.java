@@ -2,8 +2,7 @@ import java.util.*;
 class Main {
     public String solution(int n, int m, int[] arr){
 
-        String answer = null;
-        return answer;
+        return null;
     }
 
 
