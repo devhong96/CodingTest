@@ -29,6 +29,6 @@ class Solution {
                 }
             }
         }
-        return time+bridge_length; 
+        return time + bridge_length; 
     }
 }
