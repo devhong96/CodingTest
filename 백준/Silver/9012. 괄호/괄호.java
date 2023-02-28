@@ -17,7 +17,6 @@ public class Main{
                 if(bracket=='(') stack.push(bracket);
                 else if(stack.empty()){
                     answer = "NO";
-                    break;
                 }
                 else stack.pop();
             }
