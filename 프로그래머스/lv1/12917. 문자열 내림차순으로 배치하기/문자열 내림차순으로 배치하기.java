@@ -2,9 +2,8 @@ import java.util.*;
 
 class Solution {
     public String solution(String s) {
-        String[] str = s.split("");
-        
-        Arrays.sort(str, Collections.reverseOrder());
-        return String.join("", str);
+        char[] ch = s.toCharArray();
+        Arrays.sort(ch);
+        return new StringBuilder(new String(ch)).reverse().toString();
     }
 }
