@@ -1,26 +1,29 @@
 import java.util.*;
 
 class Solution {
-    private static final int[] first = {1, 2, 3, 4, 5};
-    private static final int[] second = {2, 1, 2, 3, 2, 4, 2, 5};
-    private static final int[] third = {3, 3, 1, 1, 2, 2, 4, 4, 5, 5};
+    public static int[] solution(int[] answers) {
+        int[][] patterns = {
+                {1, 2, 3, 4, 5},
+                {2, 1, 2, 3, 2, 4, 2, 5},
+                {3, 3, 1, 1, 2, 2, 4, 4, 5, 5}
+        };
 
-    public int[] count(int[] answers){
-        int firstPerson = 0, secondPerson = 0, thirdPerson = 0;
-        for (int i = 0; i < answers.length; i++) {
-            if(answers[i] == first[i % 5]) firstPerson++;
-            if(answers[i] == second[i % 8]) secondPerson++;
-            if(answers[i] == third[i % 10]) thirdPerson++;
+        int[] hit = new int[3];
+        for(int i = 0; i < hit.length; i++) {
+            for(int j = 0; j < answers.length; j++) {
+                if(patterns[i][j % patterns[i].length] == answers[j]) hit[i]++;
+            }
         }
-        ArrayList<Integer> result = new ArrayList<>();
-        int max = Math.max(firstPerson, Math.max(secondPerson, thirdPerson));
-        if(max == firstPerson) result.add(1);
-        if(max == secondPerson) result.add(2);
-        if(max == thirdPerson) result.add(3);
-        return result.stream().mapToInt(Integer::intValue).toArray();
-    }
 
-    public int[] solution(int[] answers) {
-        return count(answers);
+        int max = Math.max(hit[0], Math.max(hit[1], hit[2]));
+        List<Integer> list = new ArrayList<>();
+        for(int i = 0; i < hit.length; i++)
+            if(max == hit[i]) list.add(i + 1);
+
+        int[] answer = new int[list.size()];
+        int cnt = 0;
+        for(int num : list)
+            answer[cnt++] = num;
+        return answer;
     }
 }
