@@ -3,8 +3,12 @@ class Solution {
     static final String[] repeatWords = {"ayaaya", "yeye", "woowoo", "mama"};
 
     public boolean isBabbling(String word){
-        for (int i = 0; i < words.length; i++) {
-            word = word.replaceAll(repeatWords[i], "1").replaceAll(words[i]," ");
+        for (String repeatWord : repeatWords) {
+            word = word.replaceAll(repeatWord, "1");
+        }
+        
+        for (String s : words) {
+            word = word.replaceAll(s, " ");
         }
         return word.trim().isEmpty();
     }
