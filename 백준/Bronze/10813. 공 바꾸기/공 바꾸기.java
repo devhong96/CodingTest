@@ -13,7 +13,8 @@ public class Main {
         int array = Integer.parseInt(st.nextToken());
         int count = Integer.parseInt(st.nextToken());
         int[] arr = new int[array + 1];
-
+ 
+        //배열 범위 확인
         for(int i = 1; i < arr.length; i++){
             arr[i] = i;
         }
