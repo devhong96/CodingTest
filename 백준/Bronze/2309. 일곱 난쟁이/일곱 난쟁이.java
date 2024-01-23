@@ -9,26 +9,27 @@ public class Main {
 
         int sum = 0;
         int[] snow = new int[9];
-        for (int i = 0; i < snow.length; i++) {
+        for(int i = 0; i < snow.length; i++) {
             snow[i] = Integer.parseInt(br.readLine());
             sum += snow[i];
         }
 
         int diff = sum - 100;
         Arrays.sort(snow);
-
-        outerloop:
+        int first = 0, second = 0;
         for (int i = 0; i < snow.length; i++) {
             for (int j = i + 1; j < snow.length; j++) {
-                if (diff == snow[i] + snow[j]) {
-                    for (int k = 0; k < snow.length; k++) {
-                        if (k != i && k != j) {
-                            System.out.println(snow[k]);
-                        }
-                    }
-                    break outerloop;
+                if(diff == snow[i] + snow[j]){
+                    first = i;
+                    second = j;
+                    break;
                 }
             }
+        }
+
+        for (int i = 0; i < 9; i++) {
+            if(i != first && i != second)
+                System.out.println(snow[i]);
         }
     }
 }
