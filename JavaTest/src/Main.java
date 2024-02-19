@@ -1,20 +1,22 @@
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.IOException;
 import java.util.*;
-class Main {
-    public String solution(int n, int m, int[] arr){
 
-        return null;
+public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        Solution solution = new Solution();
+        StringTokenizer st;
+
+        st = new StringTokenizer(br.readLine());
+        int num = Integer.parseInt(st.nextToken());
+        solution.solution(num);
     }
+}
 
+class Solution {
+    public void solution(int num) {
 
-    public static void main(String[] args){
-        Main T = new Main();
-        Scanner kb = new Scanner(System.in);
-        int n=kb.nextInt();
-        int m=kb.nextInt();
-        int[] arr=new int[n];
-        for(int i=0; i<n; i++){
-            arr[i]=kb.nextInt();
-        }
-        System.out.print(T.solution(n, m, arr));
     }
 }
