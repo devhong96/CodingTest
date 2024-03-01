@@ -1,15 +1,13 @@
-import java.util.*;
-
 class Solution {
     static class State{
         public final int x;
         public final int y;
-//        public final int sum;
+        public final int sum;
 
-        public State(int x, int y){
+        public State(int x, int y, int sum){
             this.x = x;
             this.y = y;
-//            this.sum = sum;
+            this.sum = sum;
         }
     }
 
@@ -31,7 +29,6 @@ class Solution {
                 ground[y][x] = maps[y].charAt(x);
             }
         }
-        System.out.println(Arrays.deepToString(ground));
 
         Queue<State> queue = new LinkedList<>();
         List<Integer> list = new ArrayList<>();
@@ -43,12 +40,11 @@ class Solution {
                 if (!visited[y][x] && ground[y][x] != 'X') {
                     int num = ground[y][x] - '0';
                     area++;
-                    queue.add(new State(x, y));
+                    queue.add(new State(x, y, num));
                     visited[y][x] = true;
                     while(!queue.isEmpty()){
 
                         State state = queue.poll();
-                        System.out.println(num);
 
                         for(int d = 0; d < 4; d++){
 
@@ -61,8 +57,8 @@ class Solution {
                             if(visited[ny][nx]) continue;
 
                             visited[ny][nx] = true;
-                            num += (ground[ny][nx] - '0');
-                            queue.add(new State(nx, ny));
+
+                            queue.add(new State(nx, ny, num += (ground[ny][nx] - '0')));
                         }
                     }
                     list.add(num);
@@ -70,7 +66,6 @@ class Solution {
 
             }
         }
-
         if(list.isEmpty()) list.add(-1);
         Collections.sort(list);
         return list;
