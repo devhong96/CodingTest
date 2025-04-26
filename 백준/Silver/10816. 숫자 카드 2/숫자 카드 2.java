@@ -53,7 +53,7 @@ class Solution {
                 rt = mid;
             }
         }
-        return lt;
+        return rt;
     }
 
     private static int bottom(int[] arr, int key) {
@@ -67,6 +67,6 @@ class Solution {
                 rt = mid;
             }
         }
-        return lt;
+        return rt;
     }
 }
