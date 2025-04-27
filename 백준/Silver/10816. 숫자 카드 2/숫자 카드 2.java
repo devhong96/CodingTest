@@ -32,17 +32,16 @@ public class Main {
 
 class Solution {
     public void solution(int[] arr, int[] target) {
-
         StringBuilder sb = new StringBuilder();
         Arrays.sort(arr);
 
-        for (int i = 0; i < target.length; i++) {
-            sb.append(bottom(arr, target[i]) - top(arr, target[i])).append(' ');
+        for (int j : target) {
+            sb.append(upperBound(arr, j) - lowerBound(arr, j)).append(' ');
         }
         System.out.print(sb);
     }
 
-    private static int top(int[] arr, int key) {
+    private static int lowerBound(int[] arr, int key) {
         int lt = 0;
         int rt = arr.length;
         while (lt < rt) {
@@ -51,12 +50,12 @@ class Solution {
                 lt = mid + 1;
             } else {
                 rt = mid;
-            }
+            } 
         }
         return rt;
     }
 
-    private static int bottom(int[] arr, int key) {
+    private static int upperBound(int[] arr, int key) {
         int lt = 0;
         int rt = arr.length;
         while (lt < rt) {
