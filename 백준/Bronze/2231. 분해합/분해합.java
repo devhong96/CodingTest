@@ -1,49 +1,38 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.util.*;
 
 public class Main {
     public static void main(String[] args) throws IOException {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Solution solution = new Solution();
         StringTokenizer st;
 
-        st = new StringTokenizer(br.readLine());
-        int num = Integer.parseInt(st.nextToken());
-        solution.solution(num);
+        Solution solution = new Solution();
+
+        int num = Integer.parseInt(br.readLine());
+        System.out.println(solution.solution(num));
     }
 }
 
+
 class Solution {
-    public void solution(int num) {
-        List<Integer> list = new ArrayList<>();
+    public int solution(int num) {
 
-        boolean flag = false;
-        int n;
-        for (int i = 1; i <= num; i++) {
-            n = 0;
-            list.clear();
+        for(int i = 0; i < num; i++){
 
-            int temp = i;
-
-            while (temp > 0) {
-                list.add(temp % 10);
-                temp /= 10;
+            int sum = i;
+            int n = i;
+            while(n != 0) {
+                sum += n % 10;
+                n/=10;
             }
 
-            for (Integer integer : list) {
-                n += integer;
-            }
-
-            if(n + i == num) {
-                System.out.println(i);
-                flag = true;
-                break;
+            if(num == sum){
+                return i;
             }
         }
-        if(!flag) {
-            System.out.println(0);
-        }
+        
+        return 0;
     }
 }
