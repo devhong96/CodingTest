@@ -11,32 +11,53 @@ public class Main {
 
         st = new StringTokenizer(br.readLine());
         int count = Integer.parseInt(st.nextToken());
+        int[][] point = new int[count][2];
 
-        int[][] arr= new int[count][2];
         for(int i = 0; i < count; i++){
             st = new StringTokenizer(br.readLine());
-            arr[i][1] = Integer.parseInt(st.nextToken());
-            arr[i][0] = Integer.parseInt(st.nextToken());
+            point[i][0] = Integer.parseInt(st.nextToken());
+            point[i][1] = Integer.parseInt(st.nextToken());
+
         }
-        solution.solution(arr);
+
+        System.out.println(solution.solution(point));
+    }
+}
+
+class Point implements Comparable<Point> {
+
+    public int x;
+    public int y;
+
+    Point (int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public int compareTo(Point o) {
+        if(this.y == o.y) return this.x - o.x;
+        else return this.y - o.y;
     }
 }
 
 class Solution {
-    public void solution(int[][] arr) {
-
-        Arrays.sort(arr, (s1, s2) -> {
-            if(s1[0] == s2[0]){
-                return s1[1] - s2[1];
-            }else{
-                return s1[0] - s2[0];
-            }
-        });
+    public String solution(int[][] point) {
         
+        ArrayList<Point> list = new ArrayList<>();
+
         StringBuilder sb = new StringBuilder();
-        for (int[] s : arr) {
-            sb.append(s[1]).append(" ").append(s[0]).append('\n');
+
+        for (int[] p : point) {
+            list.add(new Point(p[0], p[1]));
         }
-        System.out.println(sb);
+
+        Collections.sort(list);
+
+        for (Point p : list) {
+            sb.append(p.x).append(" ").append(p.y).append('\n');
+        }
+
+        return sb.toString().trim();
     }
 }
