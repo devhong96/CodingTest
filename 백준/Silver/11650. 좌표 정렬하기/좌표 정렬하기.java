@@ -19,24 +19,46 @@ public class Main {
             point[i][1] = Integer.parseInt(st.nextToken());
 
         }
-        solution.solution(point);
+
+        System.out.println(solution.solution(point));
+    }
+}
+
+class Point implements Comparable<Point> {
+
+    public int x;
+    public int y;
+
+    Point (int x, int y){
+        this.x = x;
+        this.y = y;
+    }
+
+    @Override
+    public int compareTo(Point o) {
+        if(this.x == o.x) return this.y - o.y;
+        else return this.x - o.x;
     }
 }
 
 class Solution {
-    public void solution(int[][] point) {
-        Arrays.sort(point, (p1, p2) ->{
-            if(p1[0] == p2[0]){
-                return p1[1] - p2[1];
-            } else {
-                return p1[0] - p2[0];
-            }
-        });
+    public String solution(int[][] point) {
+
+
+        ArrayList<Point> list = new ArrayList<>();
 
         StringBuilder sb = new StringBuilder();
+
         for (int[] p : point) {
-            sb.append(p[0]).append(" ").append(p[1]).append('\n');
+            list.add(new Point(p[0], p[1]));
         }
-        System.out.println(sb);
+
+        Collections.sort(list);
+
+        for (Point p : list) {
+            sb.append(p.x).append(" ").append(p.y).append('\n');
+        }
+
+        return sb.toString().trim();
     }
 }
