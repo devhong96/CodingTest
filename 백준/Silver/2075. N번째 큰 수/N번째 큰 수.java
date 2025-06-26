@@ -1,46 +1,31 @@
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
 import java.util.*;
-
+import java.io.*;
 public class Main {
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        Solution solution = new Solution();
+  public static void main(String[] args) throws IOException {
+      BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+      StringTokenizer st;
 
-        ArrayList<Integer> list = new ArrayList<>();
+      PriorityQueue<Integer> queue = new PriorityQueue<>();
+      int n = Integer.parseInt(br.readLine());
 
-        int count = Integer.parseInt(br.readLine());
-        StringTokenizer st = null;
-
-        for (int i = 0; i < count; i++) {
-            st = new StringTokenizer(br.readLine());
-            for(int j = 0; j < count; j++){
-            list.add(Integer.parseInt(st.nextToken()));
-            }
-        }
-
-        System.out.println(solution.solution(list));
-    }
-}
-
-class Solution {
-    public int solution(ArrayList<Integer> list) {
-
-        PriorityQueue<Integer> pq = new PriorityQueue<>(Collections.reverseOrder());
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int i : list) {
-            pq.offer(i);
-        }
-
-        int count = (int)Math.sqrt(list.size());
-
-        for (int i = 0; i < count - 1; i++) {
-            pq.poll();
-        }
-
-        return pq.poll();
-    }
+      //첫번째 줄 n개의 Queue 생성
+      st = new StringTokenizer(br.readLine());
+      for (int i = 0; i < n; i++) {
+          queue.offer(Integer.parseInt(st.nextToken()));
+      }
+      
+      //Queue n개 유지하며 입력값 넣기
+      for (int i = 1; i < n; i++) {
+          st = new StringTokenizer(br.readLine());
+          for (int j = 0; j < n; j++) {
+              Integer tmp = Integer.parseInt(st.nextToken());
+              //Queue 마지막 값과 비교하여 더 클 때만 넣기
+              if(tmp > queue.peek()){
+                  queue.poll();
+                  queue.offer(tmp);
+              }
+          }
+      }
+      System.out.println(queue.poll());
+  }
 }
