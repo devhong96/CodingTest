@@ -1,7 +1,8 @@
 import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.IOException;
-import java.util.*;
+import java.io.InputStreamReader;
+import java.util.Arrays;
+import java.util.StringTokenizer;
 
 public class Main {
     public static void main(String[] args) throws IOException {
@@ -19,30 +20,32 @@ public class Main {
         }
 
         int k = Integer.parseInt(br.readLine());
-        solution.solution(arr, k);
+        
+        System.out.println(solution.solution(arr, k));
     }
 }
 
 class Solution {
-
-    public void solution(int[] arr, int k) {
+    public int solution(int[] arr, int k) {
 
         Arrays.sort(arr);
 
-        int lt = 0, rt = arr.length -1, answer = 0;
+        int lt = 0, rt = arr.length - 1, answer = 0;
 
-        while(lt < rt){
+        while(lt < rt) {
             int sum = arr[lt] + arr[rt];
-            if(sum == k){
+            if (sum == k) {
                 answer++;
                 lt++;
                 rt--;
-            }else if(sum > k){
-                rt--;
-            }else{
+            } else if (sum < k) {
                 lt++;
+            } else {
+                rt--;
             }
         }
-        System.out.print(answer);
+
+        return answer;
+
     }
 }
