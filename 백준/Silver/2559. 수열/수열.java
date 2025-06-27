@@ -30,12 +30,13 @@ public class Main {
 class Solution {
     public int solution(int[] arr, int range) {
 
-        int answer = 0, sum = 0;
+        int answer, sum = 0;
 
         for (int i = 0; i < range; i++) {
             sum += arr[i];
         }
-        
+
+        //첫 구간의 합
         answer = sum;
 
         for (int i = range; i < arr.length; i++) {
