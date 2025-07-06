@@ -15,41 +15,42 @@ public class Main {
         for(int i = 0; i < total; i++)
             num[i] = Integer.parseInt(st.nextToken());
 
-        solution.solution(num);
+        System.out.println(solution.solution(num));
     }
 }
 
 class Solution {
-    static int answer = 0;
-    static int N;
-    static int[] arr;
-    static boolean[] visited;
-    public void solution(int[] num) {
+    int[] arr, ans;
+    int length, answer = 0;
+    boolean[] visited;
+    public int solution(int[] num) {
 
-        N = num.length;
-        arr = new int[N];
-        visited = new boolean[N];
+        arr = num;
+        length = num.length;
+        ans = new int[length];
+        visited = new boolean[length];
 
-        permutation(num, 0);
-        System.out.print(answer);
+        permutation(0);
+
+        return answer;
     }
 
-    public void permutation(int[] num, int depth){
+    private void permutation(int depth) {
 
-        if(depth == N){
+        if(depth == length){
             int sum = 0;
-            for(int i = 0; i < N - 1; i++){
-                sum += Math.abs(arr[i + 1] - arr[i]);
+            for (int i = 1; i < length; i++) {
+                sum += Math.abs(ans[i - 1] - ans[i]);
             }
-            answer = Math.max(answer, sum);
+            answer = Math.max(sum, answer);
             return;
         }
 
-        for(int i = 0; i < N; i++){
+        for (int i = 0; i < length; i++) {
             if(visited[i]) continue;
-            arr[depth] = num[i];
+            ans[depth] = arr[i];
             visited[i] = true;
-            permutation(num, depth + 1);
+            permutation(depth + 1);
             visited[i] = false;
         }
     }
