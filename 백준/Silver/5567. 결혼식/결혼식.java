@@ -28,21 +28,21 @@ public class Main {
 class Solution {
 
     boolean[] visited;
-    ArrayList<Integer>[] list;
+    ArrayList<ArrayList<Integer>> graph;
     int node;
     public int solution(int n, int count, int[][] arr) {
 
         node = n;
         visited = new boolean[node + 1];
-        list = new ArrayList[node + 1];
+        graph = new ArrayList<>();
 
-        for (int i = 1; i <= node; i++) {
-            list[i] = new ArrayList<>();
+        for (int i = 0; i <= node; i++) {
+            graph.add(new ArrayList<>());
         }
 
         for (int i = 0; i < count; i++) {
-            list[arr[i][0]].add(arr[i][1]);
-            list[arr[i][1]].add(arr[i][0]);
+            graph.get(arr[i][0]).add(arr[i][1]);
+            graph.get(arr[i][1]).add(arr[i][0]);
         }
 
         return function();
@@ -51,16 +51,17 @@ class Solution {
     private int function(){
 
         Queue<Integer> queue = new LinkedList<>();
+
         queue.offer(1);
         visited[1] = true;
         int[] dist = new int[node + 1];
-        dist[0] = 1;
+        dist[0] = 0;
         int answer = 0;
 
         while (!queue.isEmpty()) {
             int from = queue.poll();
 
-            for (int next : list[from]) {
+            for (int next : graph.get(from)) {
                 if (!visited[next]) {
                     dist[next] = dist[from] + 1;
                     visited[next] = true;
