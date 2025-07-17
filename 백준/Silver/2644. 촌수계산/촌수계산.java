@@ -18,6 +18,7 @@ public class Main {
         int p2 = Integer.parseInt(st.nextToken());
 
         int m = Integer.parseInt(br.readLine());
+        
         int[][] arr = new int[m][2];
 
         for (int i = 0; i < m; i++) {
@@ -34,26 +35,31 @@ public class Main {
 
 class Solution {
 
-    int[][] graph;
+    ArrayList<ArrayList<Integer>> graph;
     boolean[] visited;
-    int N;
+    int node;
     public int solution(int n, int p1, int p2, int[][] arr) {
 
-        graph = new int[n][n];
-        N = n;
-        visited = new boolean[N];
+        graph = new ArrayList<>();
+        node = n;
+        visited = new boolean[node + 1];
 
-        for (int[] ar : arr) {
-            graph[ar[0] - 1][ar[1] - 1] = 1;
-            graph[ar[1] - 1][ar[0] - 1] = 1;
+        for (int i = 0; i <= node; i++) {
+            graph.add(new ArrayList<>());
         }
 
-        return function(p1 - 1, p2 - 1);
+        for (int[] ar : arr) {
+            graph.get(ar[1]).add(ar[0]);
+            graph.get(ar[0]).add(ar[1]);
+        }
+
+        return function(p1, p2);
     }
 
-    private int function(int start, int end) {
+    private int function(Integer start, Integer end) {
 
         int answer = 0;
+
         Queue<Integer> queue = new LinkedList<>();
         queue.offer(start);
         visited[start] = true;
@@ -62,19 +68,20 @@ class Solution {
             int size = queue.size();
 
             for (int i = 0; i < size; i++) {
-                int from = queue.poll();
+                Integer from = queue.poll();
                 if (from == end) return answer;
 
-                for (int next = 0; next < N; next++) {
-                    if (!visited[next] && graph[from][next] == 1) {
+                for (int next : graph.get(from)) {
+                    if (!visited[next]) {
                         visited[next] = true;
                         queue.offer(next);
                     }
                 }
             }
-            answer++;
-        }
 
+            answer++;
+
+        }
         return -1;
     }
 }
