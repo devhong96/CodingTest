@@ -10,41 +10,47 @@ public class Main {
 
         StringTokenizer st;
         st = new StringTokenizer(br.readLine());
-        int k = Integer.parseInt(st.nextToken());
-        int n = Integer.parseInt(st.nextToken());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        int[] tree = new int[k];
+        int[] trees = new int[N];
 
         st = new StringTokenizer(br.readLine());
-        for(int i = 0; i < k; i++){
-            tree[i] = Integer.parseInt(st.nextToken());
+        for(int i = 0; i < N; i++){
+            trees[i] = Integer.parseInt(st.nextToken());
         }
-        solution.solution(n, tree);
+
+        System.out.println(solution.solution(M, trees));
     }
 }
 
 class Solution {
-     public void solution(int n, int[] tree) {
-         long max = 0;
-         for(int t : tree) if(max < t) max = t;
+    public int solution(int M, int[] trees) {
 
-         long mid = 0;
-         long min = 0;
+        int answer = 0;
+        int min = 0, max = 0;
+        for(int tree : trees){
+            max = Math.max(tree, max);
+        }
 
-         while(min < max) {
-             long sum = 0;
+        while (min <= max) {
+            long sum = 0;
+            int mid = (min + max) / 2;
 
-             mid = (min + max) / 2;
+            for (int tree : trees) {
+                if(tree - mid > 0){
+                    sum += tree - mid;
+                }
+            }
 
-             for (int t : tree) {
-                 if(t > mid) {
-                     sum += (t - mid);
-                 }
-             }
+            if(sum >= M){
+                min = mid + 1;
+                answer = mid;
+            } else {
+                max = mid - 1;
+            }
+        }
 
-             if(sum >= n) min = mid + 1;
-             else max = mid;
-         }
-         System.out.println(min - 1);
+        return answer;
     }
 }
