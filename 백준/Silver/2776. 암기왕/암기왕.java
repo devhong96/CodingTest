@@ -49,8 +49,7 @@ class Solution {
         for (int num : note1) {
             hset.add(num);
         }
-
-
+        
         for (int num : note2) {
             if (hset.contains(num)) {
                 sb.append(1).append('\n');
